@@ -13,6 +13,7 @@ class User:
         print(self.last_name)
         print(self.email)
         print(self.age)
+        return self
 
     def enroll(self):
         if self.is_rewards_member == False:
@@ -20,13 +21,15 @@ class User:
             self.gold_card_points += 200
         else:
             print(f"Silly {self.first_name}, you are already a member!")
+        return self
 
     def spend_points(self, amount):
         if self.gold_card_points >= amount:
             self.gold_card_points -= amount
-            print(f"You have {self.gold_card_points} points left in your account")
+            print(f"{self.first_name}, you have {self.gold_card_points} points left in your account")
         else: 
-            print(f"Sorry you gotta spend money to make money. You only have {self.gold_card_points} points currently.")
+            print(f"Sorry you gotta spend money to make money. {self.first_name}, you only have {self.gold_card_points} points currently.")
+        return self
 
 luke_data = {
     "first_name": "Luke",
@@ -48,23 +51,14 @@ rihana_data = {
 }
 luke = User(luke_data)
 
-luke.display_info()
 
 jimmy = User(jimmy_data)
 
-jimmy.display_info()
 
 rihana = User(rihana_data)
 
-rihana.display_info()
+luke.display_info().enroll().spend_points(101).display_info()
 
-print(luke.gold_card_points, luke.is_rewards_member)
-luke.enroll()
-print(luke.gold_card_points, luke.is_rewards_member)
+jimmy.spend_points(50).enroll().spend_points(199)
 
-luke.spend_points(50)
-jimmy.enroll()
-jimmy.spend_points(80)
-
-luke.enroll()
-rihana.spend_points(201)
+rihana.enroll().spend_points(50).spend_points(50).spend_points(101)
